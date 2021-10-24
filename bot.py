@@ -3,6 +3,7 @@ import pyautogui
 import time
 import keyboard
 import win32api, win32con
+import actions
 
 #CONSTANT
 region=(1154,64,226,794)
@@ -65,18 +66,11 @@ while keyboard.is_pressed('q') == False :
     status = image_recognition()
     
     if status == 0 :
-        print("reeling fish ...")
-        startClickMouse()
-        time.sleep(0.9)
-        stopClickMouse()
-        time.sleep(5)
+        actions.reelFish()
     if status == 1 :
         print("waiting for a fish ...")
     if status == 2 :
-        print("*** fish noticed ***")
-        startClickMouse()
-        time.sleep(0.5)
-        stopClickMouse()
+        actions.fishNoticed()
         loop = True
         timeout = 5
         timeout_start = time.time()        
@@ -85,22 +79,15 @@ while keyboard.is_pressed('q') == False :
             colorStatus = color_recognition()
 
             if not (time.time() < timeout_start + timeout):
-                print("*** color Loop Reset ***")
+                print("*** FISH CAUGHT ***")
                 loop = False
                 break
 
             if colorStatus != 0:
                 timeout_start = time.time()    
             if colorStatus == 1 :
-                print("green color, casting fish...")
-                startClickMouse()
+                actions.castFish()
             if colorStatus == 2 :
-                print("warning, resting ...")
-                stopClickMouse()
-                time.sleep(0.8)
+                actions.rest()
             if colorStatus == 3 :
-                print("* danger, resting ...")
-                stopClickMouse()
-                time.sleep(1.5)
-
-        print("*** end color loop ***")
+                actions.pause()
