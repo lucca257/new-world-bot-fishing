@@ -10,7 +10,7 @@ reelingColor = (4, 227, 162)
 warningColor = (230, 110, 22)
 pauseColor = (109, 18, 21)
 img = pyautogui.screenshot(region=region)
-repairTimout = 15
+repairTimout = 60
 repairTimoutStart = time.time()
 
 def pixel_match(color, matcher):
@@ -54,6 +54,8 @@ def verifyEndTime(timeout_start, timeout):
     if (time.time() > timeout_start + timeout):
         return True
     return False
+
+actions.startWithFishRod()
 
 while keyboard.is_pressed('q') == False :
     status = image_recognition()
