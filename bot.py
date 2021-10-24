@@ -73,7 +73,7 @@ while keyboard.is_pressed('q') == False :
 
         while loop:
             colorStatus = color_recognition()
-            if not verifyEndTime(timeout_start, timeout):
+            if verifyEndTime(timeout_start, timeout):
                 print("*** FISH CAUGHT ***")
                 loop = False
                 break
