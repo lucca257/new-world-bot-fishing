@@ -2,6 +2,7 @@ from pyautogui import *
 import pyautogui 
 import time
 import keyboard
+import win32api, win32con
 
 #CONSTANT
 region=(1154,64,226,794)
@@ -26,17 +27,14 @@ def color_recognition():
 
             if pixel_match(color, reelingColor):
                 colorStatus = 1
-                #time.sleep(1)
                 break
 
             elif pixel_match(color, warningColor):
                 colorStatus = 2
-                #time.sleep(2)
                 break
 
             elif pixel_match(color, pauseColor):
                 colorStatus = 3
-                #time.sleep(3)
                 break    
 
     return colorStatus    
@@ -52,39 +50,59 @@ def image_recognition():
     
     return 0
 
+def clickMouseCordenates(x,y):
+    win32api.SetCursorPos((x,y))
+    time.sleep(0.3)
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,0,0)
+    time.sleep(0.3)
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0)
+
+def startClickMouse():
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
+
+def stopClickMouse():
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0)
+
 while keyboard.is_pressed('q') == False :
     status = image_recognition()
-
+    
     if status == 0 :
-        print("image not founded yet")
+        print("reeling fish ...")
+        startClickMouse()
+        time.sleep(0.5)
+        stopClickMouse()
+        time.sleep(5)
     if status == 1 :
         print("waiting for a fish ...")
     if status == 2 :
         print("*** fish noticed ***")
-
+        startClickMouse()
+        time.sleep(0.5)
+        stopClickMouse()
         loop = True
         timeout = 5
-        timeout_start = time.time()
-
-        print("start loop")
+        timeout_start = time.time()        
 
         while loop:
             colorStatus = color_recognition()
 
             if not (time.time() < timeout_start + timeout):
-                print("*** Loop Reset ***")
+                print("*** color Loop Reset ***")
                 loop = False
                 break
 
             if colorStatus != 0:
                 timeout_start = time.time()    
-            if colorStatus == 0 :
-                print("nothing")
             if colorStatus == 1 :
-                print("green ...")
+                print("green color, casting fish...")
+                startClickMouse()
             if colorStatus == 2 :
-                print("warning color ...")
+                print("warning, resting ...")
+                stopClickMouse()
+                time.sleep(2)
             if colorStatus == 3 :
-                print("pause reling ...")
+                print("* danger, resting ...")
+                stopClickMouse()
+                time.sleep(3)
 
-        print("end loop")
+        print("*** end color loop ***")
