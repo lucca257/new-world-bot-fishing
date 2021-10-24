@@ -6,7 +6,7 @@ def reelFish():
     mouseKeyboard.startClickMouse()
     time.sleep(0.9)
     mouseKeyboard.stopClickMouse()
-    time.sleep(3)
+    time.sleep(2.5)
 
 def fishNoticed():
     print("*** fish noticed ***")
@@ -27,3 +27,7 @@ def pause():
     print("danger, stop ...")
     mouseKeyboard.stopClickMouse()
     time.sleep(1.2)
+    
+def repairFishRod():
+    print("*** reparing fish rod ***")
+    time.sleep(5)

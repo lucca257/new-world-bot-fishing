@@ -2,7 +2,6 @@ from pyautogui import *
 import pyautogui 
 import time
 import keyboard
-import win32api, win32con
 import actions
 
 #CONSTANT
@@ -11,6 +10,8 @@ reelingColor = (4, 227, 162)
 warningColor = (230, 110, 22)
 pauseColor = (109, 18, 21)
 img = pyautogui.screenshot(region=region)
+repairTimout = 15
+repairTimoutStart = time.time()
 
 def pixel_match(color, matcher):
     for i in range (0,3):
@@ -50,13 +51,16 @@ def image_recognition():
     return 0
 
 def verifyEndTime(timeout_start, timeout):
-    if (time.time() < timeout_start + timeout):
+    if (time.time() > timeout_start + timeout):
         return True
     return False
 
 while keyboard.is_pressed('q') == False :
     status = image_recognition()
     
+    if status == 0 and verifyEndTime(repairTimoutStart, repairTimout):
+        actions.repairFishRod()
+        repairTimoutStart = time.time()  
     if status == 0 :
         actions.reelFish()
     if status == 1 :
@@ -73,7 +77,6 @@ while keyboard.is_pressed('q') == False :
                 print("*** FISH CAUGHT ***")
                 loop = False
                 break
-
             if colorStatus != 0:
                 timeout_start = time.time()    
             if colorStatus == 1 :
