@@ -1,4 +1,5 @@
 import win32api, win32con
+import time
 
 def clickMouseCordenates(x,y):
     win32api.SetCursorPos((x,y))
