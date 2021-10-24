@@ -41,11 +41,9 @@ def color_recognition():
 
 def image_recognition():
     if pyautogui.locateOnScreen('images/waiting_for_fish.png',region=region,confidence=0.8) != None:
-        time.sleep(0.2)
         return 1
     
     if pyautogui.locateOnScreen('images/fish_noticed.png',region=region,confidence=0.8) != None:
-        time.sleep(0.3)
         return 2
     
     return 0
@@ -69,7 +67,7 @@ while keyboard.is_pressed('q') == False :
     if status == 0 :
         print("reeling fish ...")
         startClickMouse()
-        time.sleep(0.5)
+        time.sleep(0.9)
         stopClickMouse()
         time.sleep(5)
     if status == 1 :
@@ -99,10 +97,10 @@ while keyboard.is_pressed('q') == False :
             if colorStatus == 2 :
                 print("warning, resting ...")
                 stopClickMouse()
-                time.sleep(2)
+                time.sleep(0.8)
             if colorStatus == 3 :
                 print("* danger, resting ...")
                 stopClickMouse()
-                time.sleep(3)
+                time.sleep(1.5)
 
         print("*** end color loop ***")
