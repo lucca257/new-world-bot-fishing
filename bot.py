@@ -49,18 +49,10 @@ def image_recognition():
     
     return 0
 
-def clickMouseCordenates(x,y):
-    win32api.SetCursorPos((x,y))
-    time.sleep(0.3)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,0,0)
-    time.sleep(0.3)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0)
-
-def startClickMouse():
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
-
-def stopClickMouse():
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0)
+def verifyEndTime(timeout_start, timeout):
+    if (time.time() < timeout_start + timeout):
+        return True
+    return False
 
 while keyboard.is_pressed('q') == False :
     status = image_recognition()
@@ -77,8 +69,7 @@ while keyboard.is_pressed('q') == False :
 
         while loop:
             colorStatus = color_recognition()
-
-            if not (time.time() < timeout_start + timeout):
+            if not verifyEndTime(timeout_start, timeout):
                 print("*** FISH CAUGHT ***")
                 loop = False
                 break
