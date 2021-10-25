@@ -10,7 +10,7 @@ reelingColor = (4, 227, 162)
 warningColor = (230, 110, 22)
 pauseColor = (109, 18, 21)
 img = pyautogui.screenshot(region=region)
-repairTimout = 60
+repairTimout = 1000
 repairTimoutStart = time.time()
 
 def pixel_match(color, matcher):
@@ -59,7 +59,6 @@ actions.startWithFishRod()
 
 while keyboard.is_pressed('q') == False :
     status = image_recognition()
-    
     if status == 0 and verifyEndTime(repairTimoutStart, repairTimout):
         actions.repairFishRod()
         repairTimoutStart = time.time()  
@@ -68,15 +67,17 @@ while keyboard.is_pressed('q') == False :
     if status == 1 :
         print("waiting for a fish ...")
     if status == 2 :
+        actions.pressVisionPosition()
         actions.fishNoticed()
         loop = True
         timeout = 5
         timeout_start = time.time()        
-
         while loop:
             colorStatus = color_recognition()
             if verifyEndTime(timeout_start, timeout):
                 print("*** FISH CAUGHT ***")
+                time.sleep(1)
+                actions.releaseVisionPosition()
                 loop = False
                 break
             if colorStatus != 0:

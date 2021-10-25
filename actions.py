@@ -9,6 +9,7 @@ def reelFish():
     time.sleep(2.5)
 
 def fishNoticed():
+    pressVisionPosition()
     print("*** fish noticed ***")
     mouseKeyboard.startClickMouse()
     time.sleep(0.3)
@@ -63,8 +64,16 @@ def switchFishRod():
     
 def startWithFishRod():
     openIventory()
-    time.sleep(0.1)
+    time.sleep(0.5)
     openIventory()
     time.sleep(1)
     switchFishRod()
+    time.sleep(0.1)
+    
+def pressVisionPosition():
+    mouseKeyboard.pressKey(0x42)
+    time.sleep(0.1)
+
+def releaseVisionPosition():
+    mouseKeyboard.releaseKey(0x42)
     time.sleep(0.1)
