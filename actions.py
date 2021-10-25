@@ -9,7 +9,6 @@ def reelFish():
     time.sleep(2.5)
 
 def fishNoticed():
-    pressVisionPosition()
     print("*** fish noticed ***")
     mouseKeyboard.startClickMouse()
     time.sleep(0.3)
@@ -22,7 +21,7 @@ def castFish():
 def rest():
     print("warning, resting ...")
     mouseKeyboard.stopClickMouse()
-    time.sleep(0.5)
+    time.sleep(0.8)
 
 def pause():
     print("danger, stop ...")
@@ -30,7 +29,6 @@ def pause():
     time.sleep(1.2)
     
 def repairFishRod():
-    time.sleep(3)
     print("*** reparing fish rod ***")
     
     print("Open inventory")
@@ -42,9 +40,9 @@ def repairFishRod():
     mouseKeyboard.pressKey(0x52)
     time.sleep(0.2)
     mouseKeyboard.startClickMouse()
-    time.sleep(0.2)
+    time.sleep(0.5)
     mouseKeyboard.stopClickMouse()
-    time.sleep(0.2)
+    time.sleep(0.5)
     
     print("Confirm repair")
     mouseKeyboard.pressKey(0x45)
@@ -76,4 +74,14 @@ def pressVisionPosition():
 
 def releaseVisionPosition():
     mouseKeyboard.releaseKey(0x42)
-    time.sleep(0.1)
+
+def moviment():
+    print("moving the legs ...")
+    mouseKeyboard.pressReleaseKey(0x20)
+    time.sleep(0.3)
+    mouseKeyboard.pressReleaseKey(0x41)
+    time.sleep(0.3)
+    mouseKeyboard.pressReleaseKey(0x44)
+    mouseKeyboard.pressReleaseKey(0x41)
+    mouseKeyboard.pressReleaseKey(0x41)
+    mouseKeyboard.pressReleaseKey(0x41)
