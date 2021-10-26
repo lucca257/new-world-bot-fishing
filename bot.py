@@ -10,7 +10,7 @@ reelingColor = (4, 227, 162)
 warningColor = (230, 110, 22)
 pauseColor = (109, 18, 21)
 img = pyautogui.screenshot(region=region)
-repairTimout = 60
+repairTimout = 400
 repairTimoutStart = time.time()
 
 def pixel_match(color, matcher):

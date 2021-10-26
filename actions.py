@@ -31,14 +31,14 @@ def pause():
     
 def repairFishRod():
     print("*** reparing fish rod ***")
-    
     print("Open inventory")
+    time.sleep(1)
     openIventory()
-    
+
     print("Trying repair")
-    mouseKeyboard.clickMouseCordenates(1129,660)
-    time.sleep(0.2)
     mouseKeyboard.pressKey(0x52)
+    time.sleep(0.2)
+    mouseKeyboard.clickMouseCordenates(1129,660)
     time.sleep(0.2)
     mouseKeyboard.startClickMouse()
     time.sleep(0.5)
@@ -46,8 +46,11 @@ def repairFishRod():
     time.sleep(0.5)
     
     print("Confirm repair")
+    mouseKeyboard.releaseKey(0x52)
+    time.sleep(0.2)
     mouseKeyboard.pressKey(0x45)
     time.sleep(0.2)
+    mouseKeyboard.releaseKey(0x45)
     
     print("Close inventory")
     openIventory()
