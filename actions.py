@@ -13,6 +13,7 @@ def fishNoticed():
     mouseKeyboard.startClickMouse()
     time.sleep(0.3)
     mouseKeyboard.stopClickMouse()
+    pressVisionPosition()
 
 def castFish():
     print("green color, casting fish...")
@@ -74,6 +75,7 @@ def pressVisionPosition():
 
 def releaseVisionPosition():
     mouseKeyboard.releaseKey(0x42)
+    time.sleep(0.1)
 
 def moviment():
     print("moving the legs ...")

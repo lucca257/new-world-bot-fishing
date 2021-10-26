@@ -64,7 +64,7 @@ while keyboard.is_pressed('q') == False :
             colorStatus = color_recognition()
             if verifyEndTime(timeout_start, timeout):
                 print("*** FISH CAUGHT ***")
-                time.sleep(3)
+                time.sleep(4)
                 actions.releaseVisionPosition()
                 loop = False
                 break
